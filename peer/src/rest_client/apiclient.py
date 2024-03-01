@@ -26,6 +26,7 @@ class APIClient(cmd.Cmd):
     def __init__(self):
         self.ipl = os.getenv("IP_Listening")
         self.port = os.getenv("PORT")
+        self.port2 = os.getenv("PORT_2")
         self.dir = os.getenv("DIR")
         self.url_servidor = os.getenv("URL_SERVIDOR_CENTRAL")
 
@@ -39,7 +40,7 @@ class APIClient(cmd.Cmd):
             query_response.raise_for_status()
             print(query_response)
             client_grpc = Client_Remote()
-            client_grpc.download("localhost:8080", querydata['filename'])
+            client_grpc.download(f"{self.ipl}:{self.port2}", querydata['filename'])
             return query_response.json()
         
         
